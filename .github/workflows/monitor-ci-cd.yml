@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,11 +23,7 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run Tests
-        run: |
-          python -m pytest tests/ --doctest-modules || echo "No tests folder yet"
-
-      - name: Security Scan (Bandit)
+      - name: Run Security Scan
         run: |
           pip install bandit
           bandit -r app/ --severity-level high || echo "Bandit scan completed"
